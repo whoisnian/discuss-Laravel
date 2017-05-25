@@ -1,52 +1,43 @@
 @extends('layouts.master')
 
-@section('title', 'Discuss')
+@section('title', 'Home')
 
 @section('content')
+
+<div>
     @foreach($messages as $message)
-        <hr/>
-        {{ $users->where('id', $message->userid)->first()->name }}
-        {{ $message->title }}
-        {{ $message->content }}
-        {{ $message->updated_at }}
-        @if(Session::has('id'))
-        <form action="/addreply" method="post">
-            <input type="hidden" name="messageid" value="{{ $message->id }}">
-            {{ csrf_field() }}
-            <input type="submit" value="回复">
-        </form>
-        @endif
-        @if(Session::get('id') == $message->userid)
-        <form action="/editmessage" method="post">
-            <input type="hidden" name="messageid" value="{{ $message->id }}">
-            {{ csrf_field() }}
-            <input type="submit" value="修改">
-        </form>
-        <form action="/deletemessage" method="post">
-            <input type="hidden" name="messageid" value="{{ $message->id }}">
-            {{ csrf_field() }}
-            {{ method_field('delete') }}
-            <input type="submit" value="删除">
-        </form>
-        @endif
+        <table class="table">
+            <tr>
+                <td class="table-a"><a href="/userinfo/{{ $message->userid }}" alt="hello">{{ $users->where('id', $message->userid)->first()->name }}</a><br/>{{ $message->updated_at }}</td>
+                <td class="table-b">{{ $message->title }}</td>
+                <td class="table-c">
+                    @if(Session::has('id'))
+                        <a href="/addreply/{{ $message->id }}">回复</a>
+                    @endif
+                    @if(Session::get('id') == $message->userid)
+                        <a href="/editmessage/{{ $message->id }}">修改</a>
+                        <a href="/deletemessage/{{ $message->id }}">删除</a>
+                    @endif
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" class="table-d">{{ $message->content }}</td>
+            </tr>
         @foreach($replys->where('messageid', $message->id) as $reply)
-            {{ $users->where('id', $reply->userid)->first()->name }}
-            {{ $reply->content }}
-            {{ $reply->updated_at }}
-            @if(Session::get('id') == $reply->userid)
-            <form action="/editreply" method="post">
-                <input type="hidden" name="replyid" value="{{ $reply->id }}">
-                {{ csrf_field() }}
-                <input type="submit" value="修改">
-            </form>
-            <form action="/deletereply" method="post">
-                <input type="hidden" name="replyid" value="{{ $reply->id }}">
-                {{ csrf_field() }}
-                {{ method_field('delete') }}
-                <input type="submit" value="删除">
-            </form>
-            @endif
+            <tr>
+                <td class="table-e"><a href="/userinfo/{{ $reply->userid }}">{{ $users->where('id', $reply->userid)->first()->name }}</a><br/>{{ $reply->updated_at }}</td>
+                <td class="table-f">{{ $reply->content }}</td>
+                <td class="table-e">
+                    @if(Session::get('id') == $reply->userid)
+                        <a href="/editreply/{{ $reply->id }}">修改</a>
+                        <a href="/deletereply/{{ $reply->id }}">删除</a>
+                    @endif
+                </td>
+            </tr>
         @endforeach
+        </table>
+    <br/>
     @endforeach
-    
+</div>
+
 @endsection

@@ -14,6 +14,8 @@ class AuthController extends Controller
 {
     public function showregister()
     {
+        if(session()->has('id'))
+            return Redirect::to('/');
         return view('auth.register');
     }
 
@@ -31,6 +33,8 @@ class AuthController extends Controller
 
     public function showlogin()
     {
+        if(session()->has('id'))
+            return Redirect::to('/');
         return view('auth.login');
     }
 
@@ -47,7 +51,7 @@ class AuthController extends Controller
             }
             $request->session()->put('id', $user->id);
             $request->session()->put('name', $user->name);
-            $request->session()->put('priviege', $user->priviege);
+            $request->session()->put('privilege', $user->privilege);
             return Redirect::to('/');
         } 
         else 
@@ -60,7 +64,7 @@ class AuthController extends Controller
     {
         $request->session()->put('id', '2');
         $request->session()->put('name', 'guest');
-        $request->session()->put('priviege', '0');
+        $request->session()->put('privilege', '0');
         return Redirect::to('/');
     }
 
@@ -68,7 +72,7 @@ class AuthController extends Controller
     {
         $request->session()->forget('id');
         $request->session()->forget('name');
-        $request->session()->forget('priviliege');
+        $request->session()->forget('privilege');
         return Redirect::to('/');
     }
 }

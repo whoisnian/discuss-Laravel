@@ -30,13 +30,12 @@ Route::post('/checkupdatepassword', "UserController@checkupdatepassword")->middl
 
 Route::get('/addmessage', "MessageController@addmessage")->middleware('auth');
 Route::post('/checkaddmessage', "MessageController@checkaddmessage")->middleware('auth');
-Route::get('/editmessage', "MessageController@showeditmessage")->middleware('auth');
-Route::post('/editmessage', "MessageController@editmessage")->middleware('auth');
-Route::post('/checkeditmessage', "MessageController@checkeditmessage")->middleware('auth');
-Route::delete('/deletemessage', "MessageController@deletemessage")->middleware('auth');
+Route::get('/editmessage/{message_id}', "MessageController@editmessage")->middleware('auth');
+Route::post('/checkeditmessage/{message_id}', "MessageController@checkeditmessage")->middleware('auth');
+Route::get('/deletemessage/{message_id}', "MessageController@deletemessage")->middleware('auth');
 
-Route::post('/addreply', "ReplyController@addreply")->middleware('auth');
-Route::post('/checkaddreply', "ReplyController@checkaddreply")->middleware('auth');
-Route::post('/editreply', "ReplyController@editreply")->middleware('auth');
-Route::post('/checkeditreply', "ReplyController@checkeditreply")->middleware('auth');
-Route::delete('/deletereply', "ReplyController@deletereply")->middleware('auth');
+Route::get('/addreply/{message_id}', "ReplyController@addreply")->middleware('auth');
+Route::post('/checkaddreply/{message_id}', "ReplyController@checkaddreply")->middleware('auth');
+Route::get('/editreply/{reply_id}', "ReplyController@editreply")->middleware('auth');
+Route::post('/checkeditreply/{reply_id}', "ReplyController@checkeditreply")->middleware('auth');
+Route::get('/deletereply/{reply_id}', "ReplyController@deletereply")->middleware('auth');

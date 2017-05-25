@@ -12,7 +12,7 @@
 	@else
 		<br/>
     @endif
-	<form action="/checkeditmessage" method="post">
+	<form action="/checkeditmessage/{{ $message->id }}" method="post">
 		<label>标题：<br/>
 			<input type="text" name="title" value="{{ count($errors) ? old('title') : $message->title }}" class="input"></label>
 		<br/>
@@ -33,7 +33,6 @@
 		@else
 			<input type="hidden" name="anonymous" value="0">
 		@endif
-		<input type="hidden" name="messageid" value="{{ count($errors) ? old('messageid') : $message->id }}">
 		{{ csrf_field() }}
 		<input type="submit" value="修改" class="button">
 	</form>

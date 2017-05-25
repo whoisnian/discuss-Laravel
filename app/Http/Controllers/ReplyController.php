@@ -10,18 +10,18 @@ use App\Http\Requests\ReplyRequest;
 
 class ReplyController extends Controller
 {
-    public function addreply(Request $request)
+    public function addreply(Request $request, $message_id)
     {
         $input = $request->all();
-        $data['messageid'] = $input['messageid'];
+        $data['message_id'] = $message_id;
         return View::make('reply.addreply')->with($data);
     }
 
-    public function checkaddreply(ReplyRequest $request)
+    public function checkaddreply(ReplyRequest $request, $message_id)
     {
         $input = $request->all();
         $reply = new Reply;
-        $reply->messageid = $input['messageid'];
+        $reply->messageid = $message_id;
         $reply->userid = session('id');
         $reply->content = $input['content'];
         $reply->anonymous = $input['anonymous'];
@@ -29,31 +29,31 @@ class ReplyController extends Controller
         return Redirect::to('/');
     }
 
-    public function editreply(Request $request)
+    public function editreply(Request $request, $reply_id)
     {
         $input = $request->all();
-        $reply = Reply::find($input['replyid']);
+        $reply = Reply::find($reply_id);
         if((session('id') != $reply->userid && session('privilege') != '2') || session('privilege') == '0') 
             return View::make('error')->withErrors('用户无权限！');
         $data = [];
-        $data['reply'] = Reply::find($input['replyid']);
+        $data['reply'] = Reply::find($reply_id);
         return View::make('reply.editreply')->with($data);
     }
 
-    public function checkeditreply(ReplyRequest $request)
+    public function checkeditreply(ReplyRequest $request, $reply_id)
     {
         $input = $request->all();
-        $reply = Reply::find($input['replyid']);
+        $reply = Reply::find($reply_id);
         $reply->content = $input['content'];
         $reply->anonymous = $input['anonymous'];
         $reply->update();
         return Redirect::to('/');
     }
 
-    public function deletereply(Request $request)
+    public function deletereply(Request $request, $reply_id)
     {
         $input = $request->all();
-        $reply = Reply::find($input['replyid']);
+        $reply = Reply::find($reply_id);
         if((session('id') != $reply->userid && session('privilege') != '2') || session('privilege') == '0') 
             return View::make('error')->withErrors('用户无权限！');
         $reply->delete();

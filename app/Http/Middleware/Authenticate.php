@@ -19,8 +19,6 @@ class Authenticate
     {
         if($request->session()->has('id'))
         {
-            if($request->session()->get('name') == "")
-                return Redirect::to('/newuser');
             return $next($request);
         }
         else

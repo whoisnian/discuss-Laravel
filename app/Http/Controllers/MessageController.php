@@ -28,26 +28,21 @@ class MessageController extends Controller
         return Redirect::to('/');
     }
 
-    public function showeditmessage(Request $request)
-    {
-        return View::make('message.editmessage');
-    }
-
-    public function editmessage(Request $request)
+    public function editmessage(Request $request, $message_id)
     {
         $input = $request->all();
-        $message = Message::find($input['messageid']);
+        $message = Message::find($message_id);
         if((session('id') != $message->userid && session('privilege') != '2') || session('privilege') == '0') 
             return View::make('error')->withErrors('用户无权限！');
         $data = [];
-        $data['message'] = Message::find($input['messageid']);
+        $data['message'] = Message::find($message_id);
         return View::make('message.editmessage')->with($data);
     }
 
-    public function checkeditmessage(MessageRequest $request)
+    public function checkeditmessage(MessageRequest $request, $message_id)
     {
         $input = $request->all();
-        $message = Message::find($input['messageid']);
+        $message = Message::find($message_id);
         $message->title = $input['title'];
         $message->content = $input['content'];
         $message->anonymous = $input['anonymous'];
@@ -55,14 +50,14 @@ class MessageController extends Controller
         return Redirect::to('/');
     }
 
-    public function deletemessage(Request $request)
+    public function deletemessage(Request $request, $message_id)
     {
         $input = $request->all();
-        $message = Message::find($input['messageid']);
+        $message = Message::find($message_id);
         if((session('id') != $message->userid && session('privilege') != '2') || session('privilege') == '0') 
             return View::make('error')->withErrors('用户无权限！');
         $message->delete();
-        $deletereply = Reply::where('messageid', $input['messageid'])->delete();
+        $deletereply = Reply::where('messageid', $message_id)->delete();
         return Redirect::to('/');
     }
 }
