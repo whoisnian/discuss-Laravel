@@ -6,6 +6,11 @@
 
 <div>
 	<h1>ID: {{ $user->id }}</h1>
+	<img src="/avatar/{{ $user->id }}" width="100px" height="100px"><br/>
+	@if($user->id == session('id')&&session('privilege') != '0')
+		<a style="color:#666666" href="/addavatar">修改头像</a>
+	@endif
+	<br/>
 	<table class="infobox">
 		<tr>
 			<td>用户昵称：</td>

@@ -24,6 +24,10 @@ Route::get('/anonymous', "AuthController@anonymous");
 Route::get('/logout', "AuthController@logout");
 
 Route::get('/userinfo/{user_id}', "UserController@getinfo");
+Route::get('/avatar/{user_id}', "UserController@getavatar");
+Route::get('/anonymousavatar', "UserController@getanonymousavatar");
+Route::get('/addavatar', "UserController@addavatar")->middleware('auth');
+Route::post('/checkaddavatar', "UserController@checkaddavatar")->middleware('auth');
 
 Route::get('/updatepassword', "UserController@updatepassword")->middleware('auth');
 Route::post('/checkupdatepassword', "UserController@checkupdatepassword")->middleware('auth');

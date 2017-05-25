@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use App\User;
 use App\Http\Requests\PasswordRequest;
+use App\Http\Requests\AvatarRequest;
+use Illuminate\Http\File;
 
 class UserController extends Controller
 {
@@ -19,6 +22,34 @@ class UserController extends Controller
             return View::make('user.getinfo')->with($data);
         else
             return View::make('error')->withErrors('用户不存在！');
+    }
+
+    public function getavatar(Request $request, $user_id){
+        if (!Storage::exists('avatars/' . sha1($user_id)) && $user_id != '2')
+            $avatar = Storage::get('public/noavatar');
+        else if($user_id == '2')
+            $avatar = Storage::get('public/guest');
+        else
+            $avatar = Storage::get('avatars/'.sha1($user_id));
+        return $avatar;
+    }
+
+    public function getanonymousavatar(){
+            $avatar = Storage::get('public/anonymous');
+        return $avatar;
+    }
+
+    public function addavatar(){
+        if(session('privilege') == '0') 
+            return View::make('error')->withErrors('用户无权限！');
+        return view('user.addavatar');
+    }
+
+    public function checkaddavatar(AvatarRequest $request){
+        $input = $request->all();
+        if ($request->hasFile('avatar'))
+            Storage::putFileAs('/avatars', $request->file('avatar'), sha1(session('id')));
+        return Redirect::to('/userinfo/'.session('id'));
     }
 
     public function updatepassword()
