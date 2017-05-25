@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="card">
+<div class="form">
 	<h1>Edit Reply</h1>
 
 	@if(count($errors) > 0)
@@ -13,7 +13,7 @@
 		<br/>
     @endif
 	<form action="/checkeditreply/{{ $reply->id }}" method="post">
-		<label>内容：<br/>
+		<label>内容：<br/><br/>
 			<textarea name="content" class="text">{{ count($errors) ? old('content') : $reply->content }}</textarea></label>
 		<br/>
 		<br/>

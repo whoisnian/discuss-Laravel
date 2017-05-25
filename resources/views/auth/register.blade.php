@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div  class="card">
+<div class="form">
 	<h1>Register</h1>
 
 	@if(count($errors) > 0)

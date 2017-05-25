@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="card">
+<div class="form">
 	<h1>Add Message</h1>
 
 	@if(count($errors) > 0)
@@ -13,11 +13,7 @@
 		<br/>
     @endif
 	<form action="/checkaddmessage" method="post">
-		<label>标题：<br/>
-			<input type="text" name="title" value="{{ old('title') }}" class="input"></label>
-		<br/>
-		<br/>
-		<label>内容：<br/>
+		<label>内容：<br/><br/>
 			<textarea name="content" class="text">{{ old('content') }}</textarea></label>
 		<br/>
 		<br/>

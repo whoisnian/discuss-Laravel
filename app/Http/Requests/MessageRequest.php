@@ -25,7 +25,6 @@ class MessageRequest extends FormRequest
     {
         if($this->method()=='POST')
             return [
-                'title' => 'required',
                 'content' => 'required',
                 'anonymous' => 'required',
             ];
@@ -33,7 +32,6 @@ class MessageRequest extends FormRequest
 
     public function messages(){
         return [
-            'title.required' => '标题不能为空！',
             'content.required' => '内容不能为空！',
             'anonymous.required' => '请选择是否匿名！',
         ];

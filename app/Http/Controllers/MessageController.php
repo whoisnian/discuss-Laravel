@@ -21,7 +21,6 @@ class MessageController extends Controller
         $input = $request->all();
         $message = new Message;
         $message->userid = session('id');
-        $message->title = $input['title'];
         $message->content = $input['content'];
         $message->anonymous = $input['anonymous'];
         $message->save();
@@ -43,7 +42,6 @@ class MessageController extends Controller
     {
         $input = $request->all();
         $message = Message::find($message_id);
-        $message->title = $input['title'];
         $message->content = $input['content'];
         $message->anonymous = $input['anonymous'];
         $message->update();

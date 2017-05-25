@@ -21,6 +21,7 @@
 		</tr>
 	</table>
 	<br/>
+	<input type="button" onclick="window.history.back(-1);" value="返回上一页" class="back">
 </div>
 
 @endsection
