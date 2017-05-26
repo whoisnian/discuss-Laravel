@@ -25,17 +25,15 @@ class UserController extends Controller
     }
 
     public function getavatar(Request $request, $user_id){
-        if (!Storage::exists('avatars/' . sha1($user_id)) && $user_id != '2')
-            $avatar = Storage::get('public/noavatar');
-        else if($user_id == '2')
-            $avatar = Storage::get('public/guest');
-        else
+        $user = User::where('id', $user_id)->first();
+        if(Storage::exists('avatars/'.sha1($user->id)))
             $avatar = Storage::get('avatars/'.sha1($user_id));
-        return $avatar;
-    }
-
-    public function getanonymousavatar(){
-            $avatar = Storage::get('public/anonymous');
+        else if($user->privilege == '2')
+            $avatar = Storage::disk('image')->get('image/admin');
+        else if($user->privilege == '0')
+            $avatar = Storage::disk('image')->get('image/guest');
+        else if($user->privilege == '1')
+            $avatar = Storage::disk('image')->get('image/noavatar');
         return $avatar;
     }
 

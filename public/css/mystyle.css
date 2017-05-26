@@ -215,6 +215,15 @@ html,body{
 	text-decoration: underline;
 }
 
+.maxlen{
+	white-space: nowrap;
+	display: inline-block;
+	vertical-align:top;
+	max-width: 150px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 .card-table{
 	padding: 0 0 10px 10px;
 	border-spacing: 0px;
@@ -228,7 +237,7 @@ html,body{
 
 .card-head-left{
 	width:350px;
-	min-height: 20px; 
+	height: 20px;
 	text-align: left;
 	background-color: #AAAAAA;
 	border-width: 5px 0 0 5px;
@@ -239,7 +248,7 @@ html,body{
 
 .card-head-right{
 	width:130px;
-	min-height: 20px; 
+	height: 20px;
 	text-align: right;
 	background-color: #AAAAAA;
 	border-width: 5px 5px 0 0;

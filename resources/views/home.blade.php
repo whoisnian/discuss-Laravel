@@ -7,14 +7,14 @@
 <div class="card">
     @foreach($messages as $message)
         <div class="card-message">
-            @if($message->anonymous == '0')
-                <a href="/userinfo/{{ $message->userid }}"><img src="/avatar/{{ $message->userid }}" width="50px" height="50px" align="top"></a>
+            @if($message->anonymous == '1')
+                <img src="/image/anonymous" width="50px" height="50px" align="top">
             @else
-                <img src="/anonymousavatar" width="50px" height="50px" align="top">
+                <a href="/userinfo/{{ $message->userid }}"><img src="/avatar/{{ $message->userid }}" width="50px" height="50px" align="top"></a>
             @endif
             <table class="card-table">
                 @if($message->anonymous == '0')
-                    <tr><td class="card-head-left"><a href="/userinfo/{{ $message->userid }}">{{ $users->where('id', $message->userid)->first()->name }}</a> 发表于{{ $message->updated_at }}</td>
+                    <tr><td class="card-head-left"><a class="maxlen" href="/userinfo/{{ $message->userid }}">{{ $users->where('id', $message->userid)->first()->name }}</a> 发表于{{ $message->updated_at }}</td>
                 @else
                     <tr><td class="card-head-left">用户匿名发表于{{ $message->updated_at }}
                         @if(Session::get('privilege') == '2') 
@@ -36,16 +36,16 @@
         </div>
         @foreach($replys->where('messageid', $message->id) as $reply)
             <div class="card-reply">
-                @if($reply->anonymous == '0')
-                    <a href="/userinfo/{{ $reply->userid }}"><img src="/avatar/{{ $reply->userid }}" width="50px" height="50px" align="top"></a>
+                @if($reply->anonymous == '1')
+                    <img src="/image/anonymous" width="50px" height="50px" align="top">
                 @else
-                    <img src="/anonymousavatar" width="50px" height="50px" align="top">
+                    <a href="/userinfo/{{ $reply->userid }}"><img src="/avatar/{{ $reply->userid }}" width="50px" height="50px" align="top"></a>
                 @endif
                 <table class="card-table">
                     @if($reply->anonymous == '0')
-                        <tr><td class="card-head-left"><a href="/userinfo/{{ $reply->userid }}">{{ $users->where('id', $reply->userid)->first()->name }}</a> 发表于{{ $reply->updated_at }}</td>
+                        <tr><td class="card-head-left"><a href="/userinfo/{{ $reply->userid }}">{{ $users->where('id', $reply->userid)->first()->name }}</a> 回复于{{ $reply->updated_at }}</td>
                     @else
-                        <tr><td class="card-head-left">用户匿名发表于{{ $reply->updated_at }}
+                        <tr><td class="card-head-left">用户匿名回复于{{ $reply->updated_at }}
                             @if(Session::get('privilege') == '2') 
                                 <a href="/userinfo/{{ $reply->userid }}">{{ $users->where('id', $reply->userid)->first()->name }}</a>
                             @endif
