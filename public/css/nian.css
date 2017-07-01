@@ -308,6 +308,7 @@ a {
 	border-style: solid;
 	border-color: #999999;
 	padding: 2px 5px;
+	float: left;
 	display: inline-block;
 }
 @media (min-width: 40em) {
@@ -329,6 +330,7 @@ a {
 	border-color: #999999;
 	display: inline-block;
 	padding: 2px 5px;
+	float: right;
 	border-top-right-radius: 15px;
 	-webkit-border-top-right-radius: 15px;
 }
