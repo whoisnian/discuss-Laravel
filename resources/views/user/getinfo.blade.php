@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div>
+<div style="text-align:center">
 	<h1>ID: {{ $user->id }}</h1>
 	<img src="/avatar/{{ $user->id }}" width="100px" height="100px"><br/>
 	@if($user->id == session('id')&&session('privilege') != '0')
@@ -26,7 +26,7 @@
 		</tr>
 	</table>
 	<br/>
-	<input type="button" onclick="window.history.back(-1);" value="返回上一页" class="back">
+	<label class="button">返回上一页<input style="display:none" onclick="window.history.back(-1);" type="submit" name="submit"></label>
 </div>
 
 @endsection

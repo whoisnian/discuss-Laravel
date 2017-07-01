@@ -8,9 +8,7 @@
 <br/>
 <div>
 	@if(count($errors) > 0)
-		<label>
-			<span class="error">{!! $errors->first() !!}</span>
-		</label>
+		<label><span class="error">{!! $errors->first() !!}</span></label>
     @endif
 </div>
 

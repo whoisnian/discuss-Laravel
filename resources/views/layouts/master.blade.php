@@ -3,33 +3,36 @@
     <head>
         <title>@yield('title')</title>
         <meta charset="utf-8">
-        <link rel="stylesheet" type="text/css" href="/css/mystyle.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+        <link rel="stylesheet" type="text/css" href="/css/nian.css">
     </head>
 
-    <body>
+    <body ontouchstart>
         <div class="wrapper">
-            <div class="menu">
-                <ul>
-                    <li><a href="/">首页</a></li>
+        	<div class="menu">
+				<a class="menu-title" href="/">Discuss</a>
+				<nav class="other">
+                    <a href="/">首页</a>
                     @if(Session::has('id'))
-                    <li class="dropdown">
-                        <a href="#">管理</a>
-                        <div id="drop" class="drop-content">
-                            <a href="/addmessage">新的留言</a>
-                            @if(Session::get('id') != 2)
-                            <a href="/userinfo/{{ Session::get('id') }}">个人信息</a>
-                            <a href="/updatepassword">修改密码</a>
-                            @endif
-                            <a href="/logout">注销</a>
-                        </div>
-                    </li>
+                </nav>
+				<nav class="dropdown">
+					<a href="#">管理</a><br/>
+					<nav class="drop-content">
+						<a href="/addmessage">新的留言</a>
+                        @if(Session::get('id') != 2)
+						<a href="/userinfo/{{ Session::get('id') }}">个人信息</a>
+						<a href="/updatepassword">修改密码</a>
+                        @endif
+                        <a href="/logout">注销</a>
+					</nav>
+				</nav>
                     @else
-                    <li><a href="/login">登录</a></li>
-                    <li><a href="/register">注册</a></li>
-                    <li><a href="/anonymous">匿名</a></li>
+                    <a href="/login">登录</a>
+                    <a href="/register">注册</a>
+                    <a href="/anonymous">匿名</a>
+                </nav>
                     @endif
-                </ul>
-            </div>
+			</div>
             <br/>
             <br/>
 
@@ -39,7 +42,8 @@
             <div class="push"></div>
 	    </div>
         <footer class="footer">
-            Copyright &copy; 2017 <a href="http://whoisnian.com" style="color:#FFFFFF;text-decoration:none;">nian</a> All Rights Reserved
+            Copyright &copy; 2017 <a href="http://whoisnian.com">nian</a>
+            All Rights Reserved
         </footer>
     </body>
 </html>
