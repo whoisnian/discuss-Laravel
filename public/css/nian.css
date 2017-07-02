@@ -57,7 +57,7 @@ a {
 }
 
 .dropdown {
-    display: inline-block;
+        display: inline-block;
 }
 
 .dropdown nav a {
@@ -65,12 +65,13 @@ a {
 }
 
 .drop-content {
+	z-index: 10;
 	text-align: center;
-    background-color: #777777;
-    position: absolute;
+        background-color: #777777;
+        position: absolute;
 	display: none;
 	left: 0;
-    right: 0;
+        right: 0;
 }
 @media (min-width: 40em) {
 	.drop-content {
@@ -85,7 +86,7 @@ a {
 
 /*********** footer ***********/
 .wrapper {
-    min-height: 100%;
+        min-height: 100%;
 	margin-bottom: -40px;
 }
 
@@ -118,7 +119,7 @@ a {
 }
 
 .form-title {
-    font-size: 20px;
+        font-size: 20px;
 }
 @media (min-width: 40em) {
 	.form-title {
@@ -228,11 +229,11 @@ a {
 .button{
 	background-color: #888888;
 	border-style: solid;
-    border-width: 2px;
-    border-color: #FFFFFF;
+        border-width: 2px;
+        border-color: #FFFFFF;
 	border-radius: 15px;
 	display: inline-block;
-    padding: 3px 10px;
+        padding: 3px 10px;
 	cursor: pointer;
 }
 @media (min-width: 40em) {
@@ -260,7 +261,7 @@ a {
 
 .card a{
 	color: #555555;
-    text-decoration: none;
+        text-decoration: none;
 }
 
 .card a:hover{
